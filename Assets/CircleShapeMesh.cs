@@ -4,7 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(PolygonMesh))]
 public class CircleShapeMesh : MonoBehaviour
 {
-	
 	public float radius;
 	public int circleResolution;
 	PolygonMesh polygon;
