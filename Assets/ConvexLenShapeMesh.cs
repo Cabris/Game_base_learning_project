@@ -10,6 +10,7 @@ public class ConvexLenShapeMesh : MonoBehaviour
 	public Vector2 leftLenOffset;
 	public float leftLenRadius;
 	public int circleResolution;
+	
 	PolygonMesh polygon;
 	// Use this for initialization
 	void Start ()
