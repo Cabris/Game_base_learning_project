@@ -22,8 +22,7 @@ public class Light : MonoBehaviour
 	{
 		origin = toVector2 (transform.position);
 		originVector = toVector2 (transform.rotation);
-		
-		
+
 		positions.Clear ();
 		updateReflection (origin, originVector, 0);
 		updatateVertex ();
@@ -31,7 +30,7 @@ public class Light : MonoBehaviour
 	
 	void updateReflection (Vector2 origin, Vector2 direc, int i)//origin's count
 	{
-		RaycastHit hit;
+		RaycastHit2D hit;
 		bool isHit = false;
 		if (i > maxReflectCount)
 			return;
@@ -39,7 +38,8 @@ public class Light : MonoBehaviour
 			positions.Add (origin);
 			i++;
 		}
-		if (Physics.Raycast (toVector3 (origin), toVector3 (direc), out hit)) {
+		hit=Physics2D.Raycast (origin, direc);
+		if (hit.collider!=null) {
 			if (hit.collider.gameObject.tag == "Reflectable")
 				isHit = true;
 		} 
@@ -102,7 +102,7 @@ public class Light : MonoBehaviour
 	
 	void setLineRendererPos(int i,Vector2 v){
 		Vector3 v3=toVector3(v);
-		v3.z=1;
+		v3.z=0.1f;
 		lineRenderer.SetPosition (i, v3);
 	}
 	
