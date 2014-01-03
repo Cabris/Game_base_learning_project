@@ -44,7 +44,7 @@ public class LightSprite : MonoBehaviour
 		ClearLine ();
 		for (int i = 0; i < count; i++) {
 			GameObject go = Instantiate (_lineRenderer.gameObject) as GameObject;
-			//go.transform.parent = transform;
+			go.transform.parent = transform;
 			LineRenderer line = go.GetComponent<LineRenderer> ();
 			line.SetVertexCount (2);
 			lines.Add (line);
