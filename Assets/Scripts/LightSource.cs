@@ -4,12 +4,18 @@ using System.Collections.Generic;
 
 public class LightSource : MonoBehaviour
 {
-	public Vector2 origin;
-	public Vector2 originVector;
-	public Vector2 endPoint;
-	public LightSprite lightSprite;
+	[SerializeField]
+	Vector2 origin;
+	[SerializeField]
+	Vector2 originVector;
+	[SerializeField]
+	Vector2 endPoint;
+	[SerializeField]
+	LightSprite lightSprite;
+	[SerializeField]
+	Transform goalTriggrtT;
 	public List<Vector2> positions = new List<Vector2> ();
-	public int maxReflectCount = 10;
+	int maxReflectCount = 10;
 	
 	// Use this for initialization
 	void Start ()
@@ -22,52 +28,58 @@ public class LightSource : MonoBehaviour
 	{
 		origin = toVector2 (transform.position);
 		originVector = toVector2 (transform.rotation);
-		endPoint=origin;
+		endPoint = origin;
 		positions.Clear ();
-		lightSprite.BeforeUpdateVertexs();
+		lightSprite.BeforeUpdateVertexs ();
 		updateReflection (origin, originVector, 0);
 		updatateVertex ();
-		lightSprite.UpdateVertexs();
+		lightSprite.UpdateVertexs ();
+		upDtaeGoalTrigger();
+	}
+
+	void upDtaeGoalTrigger(){
+		goalTriggrtT.position=toVector3(endPoint);
 	}
 	
 	void updateReflection (Vector2 origin, Vector2 direc, int i)//origin's count
 	{
 		RaycastHit2D hit;
 		bool isHit = false;
-		if (i > maxReflectCount){
-			endPoint=origin;
+		if (i > maxReflectCount) {
+			endPoint = origin;
 			return;
 		}
 		if (i == 0) {
 			positions.Add (origin);
 			i++;
 		}
-		string _tag="";
-		hit=Physics2D.Raycast (origin, direc);
-		if (hit.collider!=null) {
-			 _tag=hit.collider.gameObject.tag;
-			if (_tag == "Reflectable"||_tag=="LightGoal"||_tag=="Barrier")
+		string _tag = "";
+		hit = Physics2D.Raycast (origin, direc);
+		if (hit.collider != null) {
+			_tag = hit.collider.gameObject.tag;
+			if (_tag == "Reflectable" || _tag == "LightGoal" || _tag == "Barrier")
 				isHit = true;
 		} 
 		if (isHit) {
-			if(_tag=="Reflectable"){
+			if (_tag == "Reflectable") {
 				Vector3 hitPosition = hit.point;
 				Vector3 normal = hit.normal;
 				if (positions.Count <= i) {
 					positions.Add (toVector2 (hitPosition));
 					i++;
-					Vector2 r = toVector2( onReflection (direc, normal));
-					updateReflection (positions [positions.Count - 1]+r*0.01f, r, i);
+					Vector2 r = toVector2 (onReflection (direc, normal));
+					updateReflection (positions [positions.Count - 1] + r * 0.01f, r, i);
 				}
 			}
-			if(_tag=="LightGoal"){
-				endPoint=hit.point;
+			if (_tag == "LightGoal") {
+				endPoint = hit.point;
+				
 			}
-			if(_tag=="Barrier"){
-				endPoint=hit.point;
+			if (_tag == "Barrier") {
+				endPoint = hit.point;
 			}
 		} else {
-			endPoint = origin+direc*50;
+			endPoint = origin + direc * 50;
 		}
 		
 	}
@@ -83,13 +95,9 @@ public class LightSource : MonoBehaviour
 	{
 		lightSprite.SetVertexCount (positions.Count + 1);
 		for (int i=0; i<positions.Count; i++) {
-			setLineRendererPos(i,positions [i]);
+			setLineRendererPos (i, positions [i]);
 		}
-//		Vector3 lastP = positions [positions.Count - 1];
-//		Vector3 infiniteP = origin;
-//		float max = 500;
-//		infiniteP = lastP + toVector3 (endPoint) * max;
-		setLineRendererPos(positions.Count,endPoint);
+		setLineRendererPos (positions.Count, endPoint);
 	}
 	
 	Vector2 toVector2 (Vector3 v)
@@ -113,10 +121,13 @@ public class LightSource : MonoBehaviour
 		return new Vector2 (x, y).normalized;
 	}
 	
-	void setLineRendererPos(int i,Vector2 v){
-		Vector3 v3=toVector3(v);
-		v3.z=0.1f;
+	void setLineRendererPos (int i, Vector2 v)
+	{
+		Vector3 v3 = toVector3 (v);
+		v3.z = 0.1f;
 		lightSprite.SetPosition (i, v3);
 	}
+	
+	
 	
 }
