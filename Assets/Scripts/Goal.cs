@@ -5,28 +5,36 @@ public class Goal : MonoBehaviour {
 	public LightSource source;
 	public float waitTime;
 	public float count;
-	bool isConnect;
+	public bool isConnect;
+	bool connected;
 	// Use this for initialization
 	void Start () {
 		isConnect=false;
+		connected=false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(isConnect){
-			count+=Time.deltaTime;
-			if(count>=waitTime){
-				OnConnected();
+		if(!connected){
+			if(isConnect){
+				count+=Time.deltaTime;
+				if(count>=waitTime){
+					OnConnected();
+					connected=true;
+				}
+			}
+			else{
+				count=0;
 			}
 		}
-		else{
-			count=0;
-		}
+		
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.collider.tag=="LightSourceTrigger")
+		if(other.gameObject.tag=="LightSourceTrigger"){
 			isConnect = true;
+			source=other.gameObject.transform.parent.gameObject.GetComponent<LightSource>();
+		}
 	}
 	
 	void OnTriggerExit2D(Collider2D other) {
