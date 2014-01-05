@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class LightSource : MonoBehaviour
 {
-	 Vector2 origin;
+	public Vector2 origin;
 	public Vector2 originVector;
-	public Vector2 endVector;
+	public Vector2 endPoint;
 	public LightSprite lightSprite;
 	public List<Vector2> positions = new List<Vector2> ();
 	public int maxReflectCount = 10;
@@ -22,7 +22,7 @@ public class LightSource : MonoBehaviour
 	{
 		origin = toVector2 (transform.position);
 		originVector = toVector2 (transform.rotation);
-
+		endPoint=origin;
 		positions.Clear ();
 		lightSprite.BeforeUpdateVertexs();
 		updateReflection (origin, originVector, 0);
@@ -34,8 +34,10 @@ public class LightSource : MonoBehaviour
 	{
 		RaycastHit2D hit;
 		bool isHit = false;
-		if (i > maxReflectCount)
+		if (i > maxReflectCount){
+			endPoint=origin;
 			return;
+		}
 		if (i == 0) {
 			positions.Add (origin);
 			i++;
@@ -55,7 +57,7 @@ public class LightSource : MonoBehaviour
 				updateReflection (positions [positions.Count - 1]+r*0.01f, r, i);
 			}
 		} else {
-			endVector = direc;
+			endPoint = origin+direc*20;
 		}
 		
 	}
@@ -73,12 +75,11 @@ public class LightSource : MonoBehaviour
 		for (int i=0; i<positions.Count; i++) {
 			setLineRendererPos(i,positions [i]);
 		}
-		Vector3 lastP = positions [positions.Count - 1];
-		Vector3 infiniteP = origin;
-		float max = 500;
-
-		infiniteP = lastP + toVector3 (endVector) * max;
-		setLineRendererPos(positions.Count,infiniteP);
+//		Vector3 lastP = positions [positions.Count - 1];
+//		Vector3 infiniteP = origin;
+//		float max = 500;
+//		infiniteP = lastP + toVector3 (endPoint) * max;
+		setLineRendererPos(positions.Count,endPoint);
 	}
 	
 	Vector2 toVector2 (Vector3 v)
