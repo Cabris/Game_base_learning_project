@@ -46,7 +46,7 @@ public class LightSource : MonoBehaviour
 		hit=Physics2D.Raycast (origin, direc);
 		if (hit.collider!=null) {
 			 _tag=hit.collider.gameObject.tag;
-			if (_tag == "Reflectable"||_tag=="LightGoal")
+			if (_tag == "Reflectable"||_tag=="LightGoal"||_tag=="Barrier")
 				isHit = true;
 		} 
 		if (isHit) {
@@ -61,6 +61,9 @@ public class LightSource : MonoBehaviour
 				}
 			}
 			if(_tag=="LightGoal"){
+				endPoint=hit.point;
+			}
+			if(_tag=="Barrier"){
 				endPoint=hit.point;
 			}
 		} else {
