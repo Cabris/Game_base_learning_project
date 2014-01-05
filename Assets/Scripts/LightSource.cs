@@ -42,22 +42,29 @@ public class LightSource : MonoBehaviour
 			positions.Add (origin);
 			i++;
 		}
+		string _tag="";
 		hit=Physics2D.Raycast (origin, direc);
 		if (hit.collider!=null) {
-			if (hit.collider.gameObject.tag == "Reflectable")
+			 _tag=hit.collider.gameObject.tag;
+			if (_tag == "Reflectable"||_tag=="LightGoal")
 				isHit = true;
 		} 
 		if (isHit) {
-			Vector3 hitPosition = hit.point;
-			Vector3 normal = hit.normal;
-			if (positions.Count <= i) {
-				positions.Add (toVector2 (hitPosition));
-				i++;
-				Vector2 r = toVector2( onReflection (direc, normal));
-				updateReflection (positions [positions.Count - 1]+r*0.01f, r, i);
+			if(_tag=="Reflectable"){
+				Vector3 hitPosition = hit.point;
+				Vector3 normal = hit.normal;
+				if (positions.Count <= i) {
+					positions.Add (toVector2 (hitPosition));
+					i++;
+					Vector2 r = toVector2( onReflection (direc, normal));
+					updateReflection (positions [positions.Count - 1]+r*0.01f, r, i);
+				}
+			}
+			if(_tag=="LightGoal"){
+				endPoint=hit.point;
 			}
 		} else {
-			endPoint = origin+direc*20;
+			endPoint = origin+direc*50;
 		}
 		
 	}
