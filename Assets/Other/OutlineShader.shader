@@ -2,7 +2,8 @@
 	Properties {
 		_Color ("Main Color", Color) = (.5,.5,.5,1)
 		_OutlineColor ("Outline Color", Color) = (0,0,0,1)
-		_Outline ("Outline width", Range (.002, 0.03)) = .005
+		_Outline ("Outline width", Range (1, 1.5)) = 1.1
+		//_Scale ("scale", Vector4) = (1,1,1,1)
 		_MainTex ("Base (RGB)", 2D) = "white" { }
 	}
  
@@ -21,16 +22,25 @@ struct v2f {
  
 uniform float _Outline;
 uniform float4 _OutlineColor;
+//uniform float4 _Scale;
  
 v2f vert(appdata v) {
 	// just make a copy of incoming vertex data but scaled according to normal direction
 	v2f o;
-	o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
- 
+	 float4 s;
+	s.x=_Outline;
+	s.y=_Outline;
+	s.z=_Outline;
+	s.w=1;
+	o.pos = mul(UNITY_MATRIX_MVP, v.vertex*s);
+
+
 	float3 norm   = mul ((float3x3)UNITY_MATRIX_IT_MV, v.normal);
 	float2 offset = TransformViewToProjection(norm.xy);
  
-	o.pos.xy += offset * o.pos.z * _Outline;
+	//o.pos.xy += offset * o.pos.z * _Outline;
+	 //o.pos*=s;
+//	o.pos.z*=2;
 	o.color = _OutlineColor;
 	return o;
 }

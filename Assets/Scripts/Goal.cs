@@ -11,14 +11,14 @@ public class Goal : MonoBehaviour {
 	void Start () {
 		isConnect=false;
 		connected=false;
-		Debug.Log("js binding test");
-		testJs1 c = (testJs1)gameObject.GetComponent("testJs1");
-		c.testPrint("test call",5);
-		string[] strs=new string[]{"a","ss","swdwe","105w"};
-		c.testPrint2(strs);
-		Vector2[] vects=new Vector2[]{new Vector2(5,8),new Vector2(-5.5f,47),new Vector2(7.9f,-0.05f)};
-		c.testPrint2(vects);
-		Debug.Log("~js binding test");
+//		Debug.Log("js binding test");
+//		testJs1 c = (testJs1)gameObject.GetComponent("testJs1");
+//		c.testPrint("test call",5);
+//		string[] strs=new string[]{"a","ss","swdwe","105w"};
+//		c.testPrint2(strs);
+//		Vector2[] vects=new Vector2[]{new Vector2(5,8),new Vector2(-5.5f,47),new Vector2(7.9f,-0.05f)};
+//		c.testPrint2(vects);
+//		Debug.Log("~js binding test");
 	}
 	
 	// Update is called once per frame
