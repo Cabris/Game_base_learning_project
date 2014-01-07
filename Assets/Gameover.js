@@ -1,26 +1,35 @@
 ﻿#pragma strict
 
-function OnTriggerEnter (other : Collider) {
-Debug.Log("123");
-   /*if(other.tag==("lightSprite")){
-   		Debug.Log("123");
-	   	GUI.Box(Rect(5,Screen.height-Screen.height/4 , Screen.width-10,Screen.height/4),"npc : ｢･･････｣");
-   }*/
-}
-
 var timer:int;
 var count:int;
+var gameover : boolean = false;
 
 function Start () {
-	count = 60;
+	count = 10;
 }
 function Update () 
 {
-	timer=Mathf.Floor(Time.time);
-	if(timer<=60)
+	Debug.Log(Application.loadedLevel);
+	var temp = GameObject.Find("Timer");
+	timer = Mathf.Floor(Time.timeSinceLevelLoad);
+	if(timer<=10)
 	{
-		var temp = GameObject.Find("Timer");
-		count=60-timer;
-		temp.guiText.text = count.ToString();
+		//	var temp = GameObject.Find("Timer");
+		count=10-timer;
+		//temp.guiText.text = count.ToString();
+	}
+	temp.guiText.text = count.ToString();
+	if(count == 0)
+		gameover = true;
+	else if(count <= 5)
+		temp.guiText.color = Color.red;
+}
+
+function OnGUI ()
+{
+	if(gameover)
+	{
+		list.levelname = Application.loadedLevel;
+		Application.LoadLevel ("Gameover");
 	}
 }
