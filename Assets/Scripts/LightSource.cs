@@ -16,11 +16,13 @@ public class LightSource : MonoBehaviour
 	Transform goalTriggrtT;
 	public List<Vector2> positions = new List<Vector2> ();
 	int maxReflectCount = 10;
+	public MouseSelect Selecttion{get;private set;}
 	
 	// Use this for initialization
 	void Start ()
 	{
 		positions.Add (origin);
+		this.Selecttion=GetComponent<MouseSelect>();
 	}
 	
 	// Update is called once per frame
@@ -128,6 +130,8 @@ public class LightSource : MonoBehaviour
 		lightSprite.SetPosition (i, v3);
 	}
 	
-	
+	public void StartTransport(){
+
+	}
 	
 }

@@ -35,7 +35,6 @@ public class Goal : MonoBehaviour {
 				count=0;
 			}
 		}
-		
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
@@ -50,8 +49,11 @@ public class Goal : MonoBehaviour {
 	}
 	
 	void OnConnected(){
-		
-		
+		if(source!=null){
+//			source.Selecttion.rotateable=false;
+//			source.Selecttion.dragable=false;
+//			source.Selecttion.Enabled=false;
+		}
 	}
 	
 	
