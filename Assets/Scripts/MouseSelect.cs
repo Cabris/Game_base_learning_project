@@ -19,7 +19,7 @@ public class MouseSelect : MonoBehaviour {
 		_rotateable=GetComponent<Rotateable>();
 		spriteRenderer=GetComponent<SpriteRenderer>();
 		selectionState=SelectionState.NotSelect;
-		isHover=false;
+		//isHover=false;
 	}
 	
 	// Update is called once per frame

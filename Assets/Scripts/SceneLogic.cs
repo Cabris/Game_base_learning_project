@@ -14,8 +14,10 @@ public class SceneLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		selectables=GetComponentsInChildren<MouseSelect>();
-		goal.OnConnected += this.OnConnected;
-		source.OnTransportEnd  +=this.OnTransported;
+		if(goal!=null)
+			goal.OnConnected += this.OnConnected;
+		if(source!=null)
+			source.OnTransportEnd  +=this.OnTransported;
 	}
 	
 	// Update is called once per frame

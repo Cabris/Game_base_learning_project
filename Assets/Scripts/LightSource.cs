@@ -46,7 +46,8 @@ public class LightSource : MonoBehaviour
 	}
 	
 	void updtaeTrigger(){
-		sourceTriggrt.position=toVector3(endPoint);
+		if(sourceTriggrt!=null)
+			sourceTriggrt.position=toVector3(endPoint);
 	}
 	
 	void updateReflection (Vector2 origin, Vector2 direc, int i)//origin's count
