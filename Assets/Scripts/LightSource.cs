@@ -13,12 +13,15 @@ public class LightSource : MonoBehaviour
 	[SerializeField]
 	LightSprite lightSprite;
 	[SerializeField]
-	Transform goalTriggrtT;
+	Transform sourceTriggrt;
 	public List<Vector2> positions = new List<Vector2> ();
 	int maxReflectCount = 10;
 	public MouseSelect Selecttion{get;private set;}
+	bool transportStart=false;
+	public delegate void OnTransportEndEvent();
+	public OnTransportEndEvent OnTransportEnd ;
 	
-	// Use this for initialization
+	
 	void Start ()
 	{
 		positions.Add (origin);
@@ -33,14 +36,17 @@ public class LightSource : MonoBehaviour
 		endPoint = origin;
 		positions.Clear ();
 		lightSprite.BeforeUpdateVertexs ();
-		updateReflection (origin, originVector, 0);
-		updatateVertex ();
+		if(!transportStart){
+			updateReflection (origin, originVector, 0);
+			updatateVertex ();
+		}
 		lightSprite.UpdateVertexs ();
-		upDtaeGoalTrigger();
+		updtaeTrigger();
+		
 	}
-
-	void upDtaeGoalTrigger(){
-		goalTriggrtT.position=toVector3(endPoint);
+	
+	void updtaeTrigger(){
+		sourceTriggrt.position=toVector3(endPoint);
 	}
 	
 	void updateReflection (Vector2 origin, Vector2 direc, int i)//origin's count
@@ -102,6 +108,42 @@ public class LightSource : MonoBehaviour
 		setLineRendererPos (positions.Count, endPoint);
 	}
 	
+	void setLineRendererPos (int i, Vector2 v)
+	{
+		Vector3 v3 = toVector3 (v);
+		v3.z = 0.1f;
+		lightSprite.SetPosition (i, v3);
+	}
+	
+	Vector3[] toVector3Array(List<Vector2> v2s){
+		Vector3[] v3s=new Vector3[v2s.Count];
+		for(int i=0;i<v2s.Count;i++){
+			v3s[i]=toVector2(v2s[i]);
+		}
+		return v3s;
+	}
+	
+	public void StartTransport(Vector2 end){
+		List<Vector2> v2s = new List<Vector2> ();
+		foreach(Vector2 v in positions){
+			v2s.Add(v);
+		}
+		v2s.Add (end);
+		
+		Hashtable args = new Hashtable();
+		args.Add("speed",15f);
+		args.Add("orienttopath",true);
+		args.Add("path",toVector3Array(v2s));
+		args.Add ("oncomplete","transportEndedd");
+		iTween.MoveTo(gameObject,args);
+		transportStart = true;
+	}
+	
+	void transportEndedd(){
+		if (OnTransportEnd != null)
+			OnTransportEnd ();
+	}
+	
 	Vector2 toVector2 (Vector3 v)
 	{
 		return new Vector2 (v.x, v.y);
@@ -123,15 +165,20 @@ public class LightSource : MonoBehaviour
 		return new Vector2 (x, y).normalized;
 	}
 	
-	void setLineRendererPos (int i, Vector2 v)
-	{
-		Vector3 v3 = toVector3 (v);
-		v3.z = 0.1f;
-		lightSprite.SetPosition (i, v3);
-	}
 	
-	public void StartTransport(){
-
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

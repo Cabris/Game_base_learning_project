@@ -25,9 +25,10 @@ public class MouseSelect : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(_rotateable!=null)
-			_rotateable.Enabled=rotateable||Enabled;
+			_rotateable.Enabled=rotateable&&Enabled;
 		if(_dragable!=null)
-			_dragable.Enabled=dragable||Enabled;
+			_dragable.Enabled=dragable&&Enabled;
+		if(Enabled)
 		upDateMaterialStaus();
 		if(!Enabled){
 			isHover=false;

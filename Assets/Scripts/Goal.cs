@@ -2,11 +2,14 @@
 using System.Collections;
 
 public class Goal : MonoBehaviour {
-	public LightSource source;
+	//public LightSource source;
 	public float waitTime;
 	public float count;
 	public bool isConnect;
 	bool connected;
+	public delegate void OnConnectedEvent();
+	public OnConnectedEvent OnConnected;
+
 	// Use this for initialization
 	void Start () {
 		isConnect=false;
@@ -40,7 +43,7 @@ public class Goal : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag=="LightSourceTrigger"){
 			isConnect = true;
-			source=other.gameObject.transform.parent.gameObject.GetComponent<LightSource>();
+			//source=other.gameObject.transform.parent.gameObject.GetComponent<LightSource>();
 		}
 	}
 	
@@ -48,13 +51,7 @@ public class Goal : MonoBehaviour {
 		isConnect = false;
 	}
 	
-	void OnConnected(){
-		if(source!=null){
-//			source.Selecttion.rotateable=false;
-//			source.Selecttion.dragable=false;
-//			source.Selecttion.Enabled=false;
-		}
-	}
+
 	
 	
 }
