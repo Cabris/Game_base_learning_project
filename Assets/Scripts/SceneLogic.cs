@@ -40,7 +40,7 @@ public class SceneLogic : MonoBehaviour {
 			args.Add("onupdatetarget",gameObject);
 			args.Add("easeType", iTween.EaseType.easeInOutExpo);
 			iTween.ValueTo(gameObject,args);
-
+			
 		}
 	}
 	
@@ -75,8 +75,14 @@ public class SceneLogic : MonoBehaviour {
 		args.Add ("onupdate","cameraZoomUpdate");
 		args.Add("onupdatetarget",gameObject);
 		args.Add("easeType", iTween.EaseType.easeInOutExpo);
+		args.Add ("oncomplete","onLevelFinish");
+		args.Add ("oncompletetarget",gameObject);
 		iTween.ValueTo(c.gameObject,args);
-		
+	}
+	
+	void onLevelFinish(){
+		LevelFinish c = (LevelFinish)gameObject.GetComponent("LevelFinish");
+		c.OnLevelFinish();
 	}
 	
 	void cameraZoomUpdate(float z){
