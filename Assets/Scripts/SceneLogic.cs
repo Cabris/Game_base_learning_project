@@ -27,6 +27,8 @@ public class SceneLogic : MonoBehaviour {
 	
 	void OnConnected(){
 		if(source!=null){
+			LevelFinish playLaserSound = (LevelFinish)gameObject.GetComponent("LevelFinish");
+			playLaserSound.OnConnectedPlayLaserSound();
 			source.Selecttion.rotateable=false;
 			source.Selecttion.dragable=false;
 			source.Selecttion.Enabled=false;

@@ -20,3 +20,8 @@ function OnTransportedAndStopTimer()
 {
 	SceneLogicFSM.Fsm.Event("Send Stop Message");
 }
+
+function OnConnectedPlayLaserSound()
+{
+	SceneLogicFSM.Fsm.Event("Send Play Laser Sound Message");
+}
