@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\LevelFinish.js">
     <Files>
-      <File FileName="Assets\Standard Assets\LevelFinish.js" Line="4" Column="1" />
+      <File FileName="Assets\Scripts\SceneLogic.cs" Line="31" Column="44" />
+      <File FileName="Assets\Standard Assets\LevelFinish.js" Line="27" Column="2" />
       <File FileName="Assets\Scripts\SceneLogic.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\RotationAni.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Rotateable.cs" Line="1" Column="1" />
