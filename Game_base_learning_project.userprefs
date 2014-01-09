@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Icon.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ButtonHandler.cs">
     <Files>
-      <File FileName="Assets\Scripts\Icon.cs" Line="25" Column="4" />
+      <File FileName="Assets\Scripts\ButtonHandler.cs" Line="19" Column="23" />
+      <File FileName="Assets\Scripts\Icon.cs" Line="25" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
