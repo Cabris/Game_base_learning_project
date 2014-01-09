@@ -55,6 +55,8 @@ public class SceneLogic : MonoBehaviour {
 	}
 	
 	void OnTransported(){
+		LevelFinish stopTimer = (LevelFinish)gameObject.GetComponent("LevelFinish");
+		stopTimer.OnTransportedAndStopTimer();
 		Camera c = Camera.main;
 		Hashtable args = new Hashtable();
 		args.Add("speed",6.4f);
