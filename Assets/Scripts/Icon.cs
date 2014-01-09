@@ -2,10 +2,12 @@
 using System.Collections;
 
 public class Icon : MonoBehaviour {
-	
+
+	public PlayMakerFSM fsm;
+
 	// Use this for initialization
 	void Start () {
-		
+		fsm=Camera.main.GetComponent<PlayMakerFSM>();
 	}
 	
 	// Update is called once per frame
@@ -20,6 +22,7 @@ public class Icon : MonoBehaviour {
 		v.x=Random.Range(min,max)*getpn();
 		v.y=Random.Range(min,max)*getpn();
 		rigidbody.velocity=v;
+	//	fsm.SendEvent("Start");
 	}
 	
 	int getpn(){
