@@ -1,4 +1,4 @@
-##################
+﻿##################
 # Unity ignores:
 #
 # !!! WARNING !!!
@@ -25,3 +25,4 @@ Temp
 *.unityproj
 *.sln
 Thumbs.db
+*.userprefs
