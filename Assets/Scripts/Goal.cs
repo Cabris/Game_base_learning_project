@@ -29,7 +29,7 @@ public class Goal : MonoBehaviour {
 		if(!connected){
 			if(isConnect){
 				count+=Time.deltaTime;
-				if(count>=waitTime){
+				if(count>=waitTime&&OnConnected!=null){
 					OnConnected();
 					connected=true;
 				}

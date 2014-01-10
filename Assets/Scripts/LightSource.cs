@@ -8,8 +8,7 @@ public class LightSource : MonoBehaviour
 	Vector2 origin;
 	[SerializeField]
 	Vector2 originVector;
-	[SerializeField]
-	Vector2 endPoint;
+	public Vector2 endPoint;
 	[SerializeField]
 	LightSprite lightSprite;
 	[SerializeField]
@@ -20,12 +19,13 @@ public class LightSource : MonoBehaviour
 	bool transportStart=false;
 	public delegate void OnTransportEndEvent();
 	public OnTransportEndEvent OnTransportEnd ;
-	
-	
+	public Vector2 forceLink{get;set;}
+	public bool forceL;
 	void Start ()
 	{
 		positions.Add (origin);
 		this.Selecttion=GetComponent<MouseSelect>();
+		//forceLink;
 	}
 	
 	// Update is called once per frame
@@ -40,9 +40,10 @@ public class LightSource : MonoBehaviour
 			updateReflection (origin, originVector, 0);
 			updatateVertex ();
 		}
+	
 		lightSprite.UpdateVertexs ();
 		updtaeTrigger();
-		
+
 	}
 	
 	void updtaeTrigger(){
@@ -106,6 +107,8 @@ public class LightSource : MonoBehaviour
 		for (int i=0; i<positions.Count; i++) {
 			setLineRendererPos (i, positions [i]);
 		}
+		if(forceL)
+			endPoint=forceLink;
 		setLineRendererPos (positions.Count, endPoint);
 	}
 	

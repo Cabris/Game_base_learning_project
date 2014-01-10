@@ -4,7 +4,7 @@ using System.Collections;
 public class Icon : MonoBehaviour {
 
 	public PlayMakerFSM fsm;
-
+	public bool startMove;
 	// Use this for initialization
 	void Start () {
 		fsm=Camera.main.GetComponent<PlayMakerFSM>();
@@ -12,7 +12,10 @@ public class Icon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(startMove){
+			OnMouseDown() ;
+			startMove=false;
+		}
 	}
 	
 	void OnMouseDown() {
